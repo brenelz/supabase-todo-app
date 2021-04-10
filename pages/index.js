@@ -1,41 +1,14 @@
 import { useState } from "react";
-import supabase from "../utils/initSupabase";
 
 export default function Home({ todos }) {
-  const [newTodo, setNewTodo] = useState("");
-  const [allTodos, setTodos] = useState(todos || []);
+  const newTodo = "";
+  const allTodos = [];
 
-  const addTodo = async () => {
-    const result = await fetch("/api/todos", {
-      method: "POST",
-      body: JSON.stringify({ newTodo }),
-    });
-    const data = await result.json();
+  const addTodo = async () => {};
 
-    setNewTodo("");
-    setTodos((state) => [...state, data.todo]);
-  };
+  const completeTodo = async (id) => {};
 
-  const completeTodo = async (id) => {
-    const result = await fetch("/api/todos/" + id, {
-      method: "PUT",
-      body: JSON.stringify({ completed: true }),
-    });
-    const data = await result.json();
-
-    setTodos((state) =>
-      state.map((todo) => (todo.id !== data.todo.id ? todo : data.todo))
-    );
-  };
-
-  const deleteTodo = async (id) => {
-    const result = await fetch("/api/todos/" + id, {
-      method: "DELETE",
-    });
-    const data = await result.json();
-
-    setTodos((state) => state.filter((todo) => todo.id !== data.todo.id));
-  };
+  const deleteTodo = async (id) => {};
 
   return (
     <div className="max-width-container">
@@ -62,14 +35,4 @@ export default function Home({ todos }) {
       </ul>
     </div>
   );
-}
-
-export async function getServerSideProps() {
-  const { data } = await supabase.from("todos").select("id, title, completed");
-
-  return {
-    props: {
-      todos: data,
-    },
-  };
 }
