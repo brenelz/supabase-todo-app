@@ -14,3 +14,47 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.max-width-container {
+  width: 480px;
+  margin: 0 auto;
+}
+
+label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+label input[type="text"] {
+  flex: 1;
+}
+
+hr {
+  margin-top: 20px;
+}
+
+input,
+button {
+  padding: 10px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+li:nth-child(odd) {
+  background: #eee;
+}
+
+.complete {
+  margin-left: auto;
+}
