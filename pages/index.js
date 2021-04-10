@@ -17,9 +17,9 @@ export default function Home({ todos }) {
   };
 
   const completeTodo = async (id) => {
-    const result = await fetch("/api/todos", {
+    const result = await fetch("/api/todos/" + id, {
       method: "PUT",
-      body: JSON.stringify({ id, completed: true }),
+      body: JSON.stringify({ completed: true }),
     });
     const data = await result.json();
 
@@ -29,9 +29,8 @@ export default function Home({ todos }) {
   };
 
   const deleteTodo = async (id) => {
-    const result = await fetch("/api/todos", {
+    const result = await fetch("/api/todos/" + id, {
       method: "DELETE",
-      body: JSON.stringify({ id }),
     });
     const data = await result.json();
 

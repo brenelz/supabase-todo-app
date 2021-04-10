@@ -1,5 +1,5 @@
 import nc from "next-connect";
-import supabase from "../../utils/initSupabase";
+import supabase from "../../../utils/initSupabase";
 
 const handler = nc({
   onError: (error, req, res, next) => {
@@ -18,12 +18,12 @@ handler.post(async (req, res) => {
 });
 
 handler.put(async (req, res) => {
-  const { id, completed } = JSON.parse(req.body);
+  const { completed } = JSON.parse(req.body);
 
   const result = await supabase
     .from("todos")
     .update({ completed })
-    .match({ id });
+    .match({ id: req.query.id });
 
   const todo = result.data[0];
 
@@ -31,9 +31,10 @@ handler.put(async (req, res) => {
 });
 
 handler.delete(async (req, res) => {
-  const { id } = JSON.parse(req.body);
-
-  const result = await supabase.from("todos").delete().match({ id });
+  const result = await supabase
+    .from("todos")
+    .delete()
+    .match({ id: req.query.id });
 
   const todo = result.data[0];
 
